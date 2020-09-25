@@ -49,9 +49,13 @@ class KMedoids:
     # Reducing cost
     def update_clusters(self):
         cost = self.get_cost()
-        for d in self.data:
-            if d.tolist() in self.medoids.tolist():
-                continue
+        for _ in range(self.data.shape[0]):
+            # Choosing random non-medoid
+            idx = np.random.randint(0, self.data.shape[0] - 1)
+            while(self.data[idx].tolist() in self.medoids.tolist()):
+                idx = np.random.randint(0, self.data.shape[0] - 1)
+            d = self.data[idx]
+
             for i in range(self.k):
                 temp = self.medoids[i].copy()
                 self.medoids[i] = d
