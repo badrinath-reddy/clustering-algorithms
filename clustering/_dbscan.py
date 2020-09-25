@@ -4,8 +4,6 @@ DBScan clustering in pure Numpy
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
-from get_data import get_data
 
 
 class DBScan:
@@ -39,27 +37,3 @@ class DBScan:
             for i, d in enumerate(self.data):
                 if (np.sqrt(((d - self.data[idx])**2).sum()) < self.eps) and (self.cluster_assignment[i] == 0):
                     self.cluster_assignment[i] = self.cluster_assignment[idx]
-
-
-def main():
-    data, ground_truth = get_data()
-    dict = {1: {'eps': 0.2, 'min_points': 6}, 2: {
-        'eps': 0.5, 'min_points': 6}, 3: {'eps': 0.2, 'min_points': 3}}
-
-    for i in range(1, 4):
-
-        dbscan = DBScan(data, dict[i]['eps'], dict[i]['min_points'])
-        dbscan.fit()
-        plt.subplot(220 + i)
-        plt.title("DBScan Eps: " + str(dict[i]['eps']) +
-                  ", minPoints: " + str(dict[i]['min_points']))
-        plt.scatter(data[:, 0], data[:, 1],
-                    c=dbscan.cluster_assignment, s=50, cmap='viridis')
-    plt.subplot(224)
-    plt.title("Ground Truth")
-    plt.scatter(data[:, 0], data[:, 1], c=ground_truth, s=50, cmap='viridis')
-    plt.show()
-
-
-if __name__ == "__main__":
-    main()

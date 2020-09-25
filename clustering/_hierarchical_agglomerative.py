@@ -4,10 +4,6 @@ Hierarchial clustering in pure Numpy
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
-from get_data import get_data
-
-K = 2
 
 # 1 - Single Linkage
 # 2 - Complete Linkage
@@ -94,24 +90,3 @@ class HierarchicalAgglomerative:
         # Deletion
         self._matrix = np.delete(self._matrix, min_idx[0], 0)
         self._matrix = np.delete(self._matrix, min_idx[0], 1)
-
-
-def main():
-    data, ground_truth = get_data()
-    dict = {1: "Single Linkage", 2: "Complete Linkage", 3: "Average Linkage"}
-    for i in range(1, 4):
-        ha = HierarchicalAgglomerative(data, K, i)
-        ha.fit()
-        plt.subplot(220 + i)
-        plt.title("Hierarchical Agglomerative " + dict[i])
-        plt.scatter(data[:, 0], data[:, 1],
-                    c=ha.cluster_assignment, s=50, cmap='viridis')
-
-    plt.subplot(224)
-    plt.title("Ground Truth")
-    plt.scatter(data[:, 0], data[:, 1], c=ground_truth, s=50, cmap='viridis')
-    plt.show()
-
-
-if __name__ == "__main__":
-    main()

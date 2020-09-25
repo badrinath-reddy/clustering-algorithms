@@ -1,3 +1,14 @@
+# Data
+cancer.csv
+get_data.py
+test.py
+test2.py
+test3.py
+test4.py
+plots/
+.plots/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

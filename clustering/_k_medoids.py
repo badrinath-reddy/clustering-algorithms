@@ -4,12 +4,6 @@ KMedoids clustering in pure Numpy
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
-from get_data import get_data
-
-K = 2
-SEED = None
-MAX_ITER = 100
 
 
 class KMedoids:
@@ -64,25 +58,3 @@ class KMedoids:
                     continue
                 cost = temp_cost
                 break
-
-
-def main():
-    if SEED is not None:
-        np.random.seed(seed=SEED)
-    data, ground_truth = get_data()
-    k_medoids = KMedoids(data, K, MAX_ITER)
-    k_medoids.fit()
-    plt.subplot(121)
-    plt.title("K Medoids")
-    plt.scatter(data[:, 0], data[:, 1],
-                c=k_medoids.cluster_assignment, s=50, cmap='viridis')
-    plt.scatter(
-        k_medoids.medoids[:, 0], k_medoids.medoids[:, 1], c='black', s=200, alpha=0.5)
-    plt.subplot(122)
-    plt.title("Ground Truth")
-    plt.scatter(data[:, 0], data[:, 1], c=ground_truth, s=50, cmap='viridis')
-    plt.show()
-
-
-if __name__ == "__main__":
-    main()

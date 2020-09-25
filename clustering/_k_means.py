@@ -4,12 +4,6 @@ KMeans clustering in pure Numpy
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
-from get_data import get_data
-
-K = 2
-SEED = None
-MAX_ITER = 100
 
 
 class KMeans:
@@ -50,25 +44,3 @@ class KMeans:
     def update_clusters(self):
         self.centroids = np.array(
             [self.data[self.cluster_assignment == i].mean(axis=0) for i in range(self.k)])
-
-
-def main():
-    if SEED is not None:
-        np.random.seed(seed=SEED)
-    data, ground_truth = get_data()
-    k_means = KMeans(data, K, MAX_ITER)
-    k_means.fit()
-    plt.subplot(121)
-    plt.title("K Means")
-    plt.scatter(data[:, 0], data[:, 1],
-                c=k_means.cluster_assignment, s=50, cmap='viridis')
-    plt.scatter(
-        k_means.centroids[:, 0], k_means.centroids[:, 1], c='black', s=200, alpha=0.5)
-    plt.subplot(122)
-    plt.title("Ground Truth")
-    plt.scatter(data[:, 0], data[:, 1], c=ground_truth, s=50, cmap='viridis')
-    plt.show()
-
-
-if __name__ == "__main__":
-    main()
