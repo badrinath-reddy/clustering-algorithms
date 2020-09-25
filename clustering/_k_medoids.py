@@ -7,10 +7,11 @@ import numpy as np
 
 
 class KMedoids:
-    def __init__(self, data, k, max_iter):
+    def __init__(self, data, k, max_iter, seed=None):
         self.data = data
         self.k = k
         self.max_iter = max_iter
+        self.seed = seed
         self.medoids = None
         self.cluster_assignment = None
 
@@ -27,6 +28,8 @@ class KMedoids:
 
     # Random K elements
     def get_initial_medoids(self):
+        if self.seed is not None:
+            np.random.seed(seed=self.seed)
         medoids = self.data.copy()
         np.random.shuffle(medoids)
         self.medoids = medoids[:self.k]

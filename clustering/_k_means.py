@@ -7,10 +7,11 @@ import numpy as np
 
 
 class KMeans:
-    def __init__(self, data, k, max_iter):
+    def __init__(self, data, k, max_iter, seed=None):
         self.data = data
         self.k = k
         self.max_iter = max_iter
+        self.seed = seed
         self.cluster_assignment = None
         self.centroids = None
 
@@ -30,6 +31,8 @@ class KMeans:
 
     # Random K elements
     def get_initial_centroids(self):
+        if self.seed is not None:
+            np.random.seed(seed=self.seed)
         centroids = self.data.copy()
         np.random.shuffle(centroids)
         self.centroids = centroids[:self.k]
