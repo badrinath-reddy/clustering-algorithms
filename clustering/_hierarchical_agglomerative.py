@@ -84,9 +84,10 @@ class HierarchicalAgglomerative:
                 self._matrix[i][min_idx[1]] = self.merge(
                     self._matrix[i][min_idx[1]],  self._matrix[i][min_idx[0]], self.cluster_sizes[min_idx[1]], self.cluster_sizes[min_idx[0]])
 
+        # Updating cluster sizes
         self.cluster_sizes[min_idx[1]] += self.cluster_sizes[min_idx[0]]
-        self.cluster_sizes = np.delete(self.cluster_sizes, min_idx[0])
 
         # Deletion
+        self.cluster_sizes = np.delete(self.cluster_sizes, min_idx[0])
         self._matrix = np.delete(self._matrix, min_idx[0], 0)
         self._matrix = np.delete(self._matrix, min_idx[0], 1)
