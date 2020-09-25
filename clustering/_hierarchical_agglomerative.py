@@ -46,6 +46,7 @@ class HierarchicalAgglomerative:
                 ans[i][j] = np.linalg.norm(self.data[i] - self.data[j])
         self._matrix = ans
 
+    # merging based on various linkages
     def merge(self, x, y, s_x, s_y):
         if self.linkage == 1:
             return min(x, y)
