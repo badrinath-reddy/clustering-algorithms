@@ -21,6 +21,8 @@ class HierarchicalAgglomerative:
 
     def fit(self):
         self.initialize()
+
+        # Loop until required number of clusters
         for i in range(self.data.shape[0] - self.k):
             self.group()
 
